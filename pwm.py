@@ -20,7 +20,7 @@ Range = 1024 # range of 0-1023 integers, 1024 appears to do nothing
     # Don't need a higher range bc I will use the 1024 steps to control the
         # 900mV coming out of the Op Amp to get 0.88mV steps.
 DutyCalc = 221 # from 0 to 1024
-    
+
 DutyCycle = DutyCalc*100/Range # from 0 to 100
 # Freq = base clock / (divisor x range)
 # Base Clock = 19.2MHz
@@ -65,6 +65,8 @@ Volts = 3.3*DutyCalc/Range
 Sensor = 0.9*DutyCalc/Range
 print("Pin 18 is set to %g Volts" %Volts)
 print("Past the Op Amp, sensor voltage calculates to %g Volts" %Sensor)
+raw_input("Press [Enter] to stop PWM.")
+wiringpi.pwmWrite(18,0) # duty cycle between 0 and 1024. 0 = off, 1024 = fully on
 
 ### OR, using wiringpi numbers
 ##wiringpi.wiringPiSetup()
