@@ -3,10 +3,10 @@ import socket
 import os
 import sys
 
-if os.name == "posix":
+if os.name == "posix": # Linux
     IP_ADDR = '10.42.0.52'
 elif os.name == "nt":   # Windows
-    IP_ADDR = "192.168.137.181"
+    IP_ADDR = "192.168.137.112"
     # For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings
     #IP_ADDR = '127.0.0.1'
     #IP_ADDR = 'localhost'
@@ -16,7 +16,7 @@ else:
     sys.exit(1)
 
 TCP_PORT = 50525
-BUFFER_SIZE = 1024
+#BUFFER_SIZE = 1024
 #MESSAGE = "Hello, World!"
 
 # Asks the user for an integer using the sting in prompt,
