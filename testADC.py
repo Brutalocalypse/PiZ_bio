@@ -79,7 +79,9 @@ CLK_DIV_2 = 0x2
 
 MODE = 0b11 #SPI_CPHA | SPI_CPOL
 BITS = 8
-SPEED = 50000 # in Hz, AD7705 lists 2.4576MHz
+SPEED = 100000 # changed to 100MHz after adding Capacitors to circuit as 50kHz was no longer working
+# SPEED = 50000 # Normal operational freq = 50kHz, AD7705 lists 2.4576MHz as spec
+	# 1MHz and 500kHz were too fast
 DELAY = 10 # s or ms?
 
 class AD770X():
