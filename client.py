@@ -3,6 +3,8 @@ import socket
 import os
 import sys
 
+# For Windows Machines, must enable IPv4 Ping Response in Advanced Firewall Settings
+
 if os.name == "posix": # Linux
     IP_ADDR = '10.42.0.52'
 elif os.name == "nt":   # Windows
