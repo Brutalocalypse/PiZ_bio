@@ -29,9 +29,12 @@ def get_msg(s, delimiter_char='\n'):
     return msg
 
 def perform_command(command, args):
-    if command == "pwm":
-        print "Received 'pwm' command. Starting pwm"
-        os.system("sudo python pwm.py %s" % args) # starts a new thread for script to run on
+    if command == "demo":
+        print "Received 'demo' command. Starting Demo"
+        os.system("sudo python demo.py %s" % args)
+    elif command == "pwm":
+        print "Received 'pwm' command. Starting PWM"
+        os.system("sudo python pwm.py %s" % args) 
     else:
         print "Received unidentified command: '%s'. Terminating" % command
         sys.exit(1)

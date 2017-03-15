@@ -3,12 +3,10 @@ import socket
 import os
 import sys
 
-# For Windows Machines, must enable IPv4 Ping Response in Advanced Firewall Settings
-
 if os.name == "posix": # Linux
     IP_ADDR = '10.42.0.52'
 elif os.name == "nt":   # Windows
-    IP_ADDR = "192.168.137.149"
+    IP_ADDR = "192.168.137.123"
     # For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings
     #IP_ADDR = '127.0.0.1'
     #IP_ADDR = 'localhost'
@@ -51,12 +49,13 @@ if __name__ == "__main__":
 
     # Ask the user for input
     while True:
+        file = raw_input("run demo or pwm script? ")
         n1 = get_int("Please input parameter 1 (integer): ", 0, 100)
         n2 = get_int("Please input parameter 2 (integer): ", 0, 100)
         n3 = get_int("Please input parameter 3 (integer): ", 0, 100)
         n4 = get_int("Please input parameter 4 (integer): ", 0, 100)
-
-        s.send("pwm:%d %d %d %d\n" % (n1, n2, n3, n4))
+		
+        s.send("%s:%d %d %d %d\n" % (file, n1, n2, n3, n4))
         print "Command Sent!"
 
     #data = s.recv(BUFFER_SIZE)
