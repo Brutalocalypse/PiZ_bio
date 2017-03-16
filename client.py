@@ -6,7 +6,7 @@ import sys
 if os.name == "posix": # Linux
     IP_ADDR = '10.42.0.52'
 elif os.name == "nt":   # Windows
-    IP_ADDR = "192.168.137.123"
+    IP_ADDR = "192.168.137.68"
     # For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings
     #IP_ADDR = '127.0.0.1'
     #IP_ADDR = 'localhost'
