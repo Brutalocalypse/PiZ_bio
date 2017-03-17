@@ -135,16 +135,16 @@ def main(args):
     import time
     ad7705 = AD770X()    
     ad7705.initChannel(CHN_AIN1)
-    while True : 
-	#print "ready? %s" % ad7705.dataReady(CHN_AIN1)
-	time.sleep(0.02)
 
-	print "raw %s" % ad7705.readADResultRaw(CHN_AIN1) 
-        	
-	print "voltage %s" % ad7705.readVoltage(CHN_AIN1,2.5)
+    time.sleep(0.02)
 
-
-	time.sleep (1)
+    raw_value = ad7705.readADResultRaw(CHN_AIN1) 
+    voltage_reading = ad7705.readVoltage(CHN_AIN1,2.5)
+    #print "raw = %s bits" % raw_value
+    #print "voltage = %s volts" % voltage_reading
+    output = [raw_value, voltage_reading]	
+    # return a value to Demo.py
+    return output
 
 if __name__ == '__main__':
     import sys
