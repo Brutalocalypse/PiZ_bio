@@ -32,6 +32,9 @@ def perform_command(command, args):
     if command == "demo":
         print "Received 'demo' command. Starting Demo"
         os.system("sudo python demo.py %s" % args)
+    elif command == "demo2":
+        print "Received 'demo2' command. Starting Demo2"
+        os.system("sudo python demo2.py %s" % args)        
     elif command == "pwm":
         print "Received 'pwm' command. Starting PWM"
         os.system("sudo python pwm.py %s" % args) 
