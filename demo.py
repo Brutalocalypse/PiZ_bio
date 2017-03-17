@@ -3,9 +3,11 @@ print("hello and welcome")
 print("importing libraries")
 
 import sys
+import os
 import wiringpi
 import time
-    # help(wiringpi) to see functions and options
+import subprocess
+    
 user_input = sys.argv
 start = float(user_input[1])
 high = float(user_input[2])
@@ -68,14 +70,37 @@ print DutyCalc
 print "start %0.3f volts" %start
 # Test
 for i in range(begin, finish+1):
-	print "i %i in loop" %i
-	print "DutyCalc %i of 1024" %DutyCalc
+	print "i: %i in loop" %i
+	print "DutyCalc: %i of 1024" %DutyCalc
 	DutyCalc = ((start+(i*0.001))*Range)/(0.4)# has range of Range
 	voltage = DutyCalc*0.4/Range
 	# pass in variable for time delay from GUI
 	time.sleep(0.040)
 	wiringpi.pwmWrite(18,int(DutyCalc))
-	print "voltage is %0.3f" %voltage
+	print "voltage is %0.3f volts" %voltage
+	# call ADC
+	#os.system("sudo python ADC.py")
+	# get ADC output
+	proc = subprocess.Popen("sudo python ADC.py", stdout=subprocess.PIPE, shell=True)
+	#(out, err) = proc.communicate()
+	#out = out.split(",")
+	#print out
+	#adc_out = subprocess.check_output("sudo python ADC.py", shell=True)
+	#adc_out = subprocess.check_output(["sudo python ADC.py"], shell=True)
+	
+	#test = subprocess.Popen(["sudo python ADC.py"], stdout=subprocess.PIPE)
+	(adc_out, err) = proc.communicate()
+	#adc_out = test.stdout.read()
+	#adc_out = test.stderr.read()
+	print "ADC raw value: %s bits, voltage: %s volts " %(adc_out, adc_out)
+	#print "ADC raw value: %s bits, voltage: %s volts " %(adc_out[0], adc_out[1])
+	# convert voltage to current value using Ohms Law
+		# insert shunt resisitor value
+	#current = adc_out[1]/shunt_resistor
+	#print "calculated current is: %s Amps "
 
+	# save this data into a txt or CSV file
+		# Fortmat: PWM Calc Voltage, ADC Sensed Voltage, ADC Calc Current
+	
 raw_input("Press [Enter] to stop PWM.")
 wiringpi.pwmWrite(18,0) # duty cycle between 0 and 1024. 0 = off, 1024 = fully on
