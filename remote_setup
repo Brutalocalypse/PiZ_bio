@@ -1,1 +1,4 @@
 # For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings
+
+# Generate SSH keys for SFTP file transfers
+  Can use either GIT GUI, Putty or OpenSSH for generating SSH keys for windows
