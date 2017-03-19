@@ -145,6 +145,17 @@ class AD770X():
 		for i in range(100) :
 			self.spi.xfer([0xff])        
 
+def open_csv(sample_num):
+	csv_fname = "adc_test_%s.csv" % (sample_num)
+	#if os.path.exists("./%s" % csv_fname):
+	#	print "Warning: test CSV already exists. HANDLE THIS JORDAN. Not overwriting."
+	#	sys.exit(1)
+	#else:
+	csv_file = open("./%s" % csv_fname, "w")
+	csv_file.write("iteration, input voltage, adc voltage, adc current\n")
+	print "CSV file opened: %s" % csv_file
+	return csv_file
+			
 def main(args):
 	import time
 	ad7705 = AD770X()    
@@ -162,6 +173,9 @@ def main(args):
 	print("test low is %.3f volts" %low)
 	print("test end at %.3f volts" %end)
 
+	# TODO: add in the sample number
+	test_csv = open_csv(1)
+	
 	# Range = 2048 # sets the range of the duty cycle, 2^n bits
 		# Over a voltage range of 0-900mV, this grants 0.44mV steps.
 	Range = 1024 # range of 0-1023 integers, 1024 appears to do nothing
@@ -233,9 +247,13 @@ def main(args):
 		calc_current = voltage_reading/shunt_resistor
 		print "calculated current is %s Amps" %calc_current
 		print "  "
+		
+		# Save the test results
+		test_csv.write("%d, %0.3f, %0.3f, %0.3f\n" % (i, voltage, voltage_reading, calc_current))
 
 	raw_input("Press [Enter] to stop PWM.")
 	wiringpi.pwmWrite(18,0) # duty cycle between 0 and 1024. 0 = off, 1024 = fully on
+	test_csv.close()
 
 if __name__ == '__main__':
 	import sys
