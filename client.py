@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 import socket
 import os
 import sys
@@ -6,7 +6,7 @@ import sys
 if os.name == "posix": # Linux
     IP_ADDR = '10.42.0.52'
 elif os.name == "nt":   # Windows
-    IP_ADDR = "192.168.137.68"
+    IP_ADDR = "192.168.137.251"
     # For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings
     #IP_ADDR = '127.0.0.1'
     #IP_ADDR = 'localhost'
@@ -29,7 +29,7 @@ def get_int(prompt, min_val, max_val):
 
         # Validate input
         try:
-            num = int(num)
+            num = float(num)
             if num > max_val or num < min_val:
                 print "Error: input not within range."
                 continue
@@ -49,13 +49,13 @@ if __name__ == "__main__":
 
     # Ask the user for input
     while True:
-        file = raw_input("run demo or pwm script? ")
-        n1 = get_int("Please input parameter 1 (integer): ", 0, 100)
-        n2 = get_int("Please input parameter 2 (integer): ", 0, 100)
-        n3 = get_int("Please input parameter 3 (integer): ", 0, 100)
-        n4 = get_int("Please input parameter 4 (integer): ", 0, 100)
+        file = raw_input("run demo, demo2 or pwm script? ")
+        n1 = get_int("Please input parameter 1 (float): ", 0, 0.4)
+        n2 = get_int("Please input parameter 2 (float): ", 0, 0.4)
+        n3 = get_int("Please input parameter 3 (float): ", 0, 0.4)
+        n4 = get_int("Please input parameter 4 (float): ", 0, 0.4)
 		
-        s.send("%s:%d %d %d %d\n" % (file, n1, n2, n3, n4))
+        s.send("%s:%0.3f %0.3f %0.3 f%0.3f\n" % (file, n1, n2, n3, n4))
         print "Command Sent!"
 
     #data = s.recv(BUFFER_SIZE)
