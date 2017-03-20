@@ -51,4 +51,8 @@ setup on Pi (need to setup SFTP on Pi in order to push file from Pi to Windows P
 On new remote PC
   will have to erase cache each time even though fingerprint key has been input!!!!
   ssh-keygen -f "/home/pi/.ssh/known_hosts" -R 192.168.137.1
+<<<<<<< HEAD
       
+=======
+      
+>>>>>>> 2a74fd01e3c91f95ff2e54f6436dd181094fdb1e
