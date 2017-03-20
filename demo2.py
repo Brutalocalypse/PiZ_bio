@@ -8,6 +8,9 @@ import wiringpi
 import time
 import subprocess
 import spidev
+
+# Our owm code
+from sftp import upload_file
     
 REG_CMM = 0x0 #communication register 8 bit
 REG_SETUP = 0x1 #setup register 8 bit
@@ -154,7 +157,7 @@ def open_csv(sample_num):
 	csv_file = open("./%s" % csv_fname, "w")
 	csv_file.write("iteration, input voltage, adc voltage, adc current\n")
 	print "CSV file opened: %s" % csv_file
-	return csv_file
+	return csv_fname,csv_file
 			
 def main(args):
 	import time
@@ -174,7 +177,7 @@ def main(args):
 	print("test end at %.3f volts" %end)
 
 	# TODO: add in the sample number
-	test_csv = open_csv(1)
+	csv_fname, test_csv = open_csv(1)
 	
 	# Range = 2048 # sets the range of the duty cycle, 2^n bits
 		# Over a voltage range of 0-900mV, this grants 0.44mV steps.
@@ -254,6 +257,7 @@ def main(args):
 	raw_input("Press [Enter] to stop PWM.")
 	wiringpi.pwmWrite(18,0) # duty cycle between 0 and 1024. 0 = off, 1024 = fully on
 	test_csv.close()
+	upload_file(csv_fname)
 
 if __name__ == '__main__':
 	import sys
