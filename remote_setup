@@ -39,7 +39,7 @@ setup on Pi (need to setup SFTP on Pi in order to push file from Pi to Windows P
     pass this key onto Windows in the Authorized Key file under "ssh" under Username
   Make a ssh config for better use
     sudo nano config (information for connecting)
-      in .ssh directory
+      in .ssh directory (~/.ssh)
       
       Host Name
         Hostname ipAddress
