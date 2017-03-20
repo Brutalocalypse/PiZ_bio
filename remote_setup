@@ -1,4 +1,6 @@
-# For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings
+# For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings inbound rules
+  File and Printer Sharing (Echo Request - ICMPv4-In)
+    Private and Domain Profiles
 
 Port 22 for TCP
 
