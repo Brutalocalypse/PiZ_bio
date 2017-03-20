@@ -47,4 +47,8 @@ setup on Pi (need to setup SFTP on Pi in order to push file from Pi to Windows P
         
    Test via command line on Pi
     scp present_directory/filename name(from ssh.config):remote_path/filename
+    
+On new remote PC
+  will have to erase cache each time even though fingerprint key has been input!!!!
+  ssh-keygen -f "/home/pi/.ssh/known_hosts" -R 192.168.137.1
       
