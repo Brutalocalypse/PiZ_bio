@@ -2,7 +2,7 @@
   File and Printer Sharing (Echo Request - ICMPv4-In)
     Private and Domain Profiles
 
-Port 22 for TCP
+Port 22 for SSH Server
 
 Open up port forwarding inbound rule for 22 in Firewall
 
