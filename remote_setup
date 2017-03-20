@@ -1,0 +1,45 @@
+# For Windows Machines, must enable IPv4 Ping Response in Advanded Firewall Settings
+
+Port 22 for TCP
+
+Open up port forwarding inbound rule for 22 in Firewall
+
+# Generate SSH keys for SFTP file transfers
+  Can use either GIT GUI, Putty or OpenSSH for generating SSH keys for windows
+
+
+SFTP for python
+  crypto error: sudo apt-get install libffi-dev libssl-dev
+
+                sudo pip install cryptography --force-reinstall
+   
+install:
+  # Search for pysftp
+  pip search pysftp
+
+  pysftp                    # - A friendly face on SFTP
+
+  #Install pysftp
+  pip install pysftp
+   
+File example:
+  import pysftp
+
+  with pysftp.Connection('hostname', username='me', password='secret') as sftp:
+      with sftp.cd('public'):             # temporarily chdir to public
+          sftp.put('/my/local/filename')  # upload file to public/ on remote
+          sftp.get('remote_file')         # get a remote file
+          
+/////////////
+setup on Pi (need to setup SFTP on Pi in order to push file from Pi to Windows PC)
+  in terminal: ssh-keygen.exe (generate a public ssh key)
+    in .ssh directory - ~/.ssh
+    pass this key onto Windows in the Authorized Key file under "ssh" under Username
+  Make a ssh config for better use
+    sudo nano config (information for connecting)
+      in .ssh directory
+      
+      Host Name
+        Hostname ipAddress
+        User Username
+      
