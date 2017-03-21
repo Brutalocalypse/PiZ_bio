@@ -192,7 +192,7 @@ def main(args):
 	# Base Clock = 19.2MHz
 	Divisor = 4 # divisor for PWM
 	Frequency = 19200000/(Divisor*Range)
-		#Freq of 18MHz (Divisor of 1) was unstable or too high for multimeter
+		#Freq of 18.75kHz (Divisor of 1) was unstable or too high for multimeter, 9.375kHz and lower works
 	shunt_resistor = 1500 # 1.5kOhmn
 	Vref = 0.9 # volts
 	print("Range set to %i units" %Range)
@@ -222,6 +222,21 @@ def main(args):
 	print("Pin 18 is set to %g Volts" %Volts)
 	print("Past the Op Amp, sensor voltage calculates to %g Volts" %Sensor)
 
+	# Setting the pin(s) high/low in order to set RE voltage switch position
+		# Matt's circuit has normally-closed switches requires a HIGH to open them
+		# Matt figures 3 switches are needed, 1 from CE to RE opamp_1-, 1 from RE opamp_1+ to opamp_2+, 1 from opamp_1+ to GND
+		# Switch 1 - CE to RE_1-
+			# set GPIO pin 23 to Output
+			# wiringpi.pinMode(23, 1)
+			# set GPIO pin 23 to HIGH
+			# wiringpi.digitalWrite(23, 1)
+		# Switch 2 - RE_1+ to RE_2+
+			# wiringpi.pinMode(24, 1)
+			# wiringpi.digitalWrite(24, 1)
+		# Switch 3 - RE_1+ to GND
+			# wiringpi.pinMode(25, 1)
+			# wiringpi.digitalWrite(25, 1)
+			
 	raw_input("Press [Enter] to begin test.")
 	# Prep for test
 	begin = int(start*1000)
