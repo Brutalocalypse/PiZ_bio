@@ -193,7 +193,8 @@ def main(args):
 	Divisor = 4 # divisor for PWM
 	Frequency = 19200000/(Divisor*Range)
 		#Freq of 18MHz (Divisor of 1) was unstable or too high for multimeter
-	shunt_resistor = 1000000 # 1 MOhmn
+	shunt_resistor = 1500 # 1.5kOhmn
+	Vref = 0.9 # volts
 	print("Range set to %i units" %Range)
 	print("DutyCalc set to %i of %i" %(DutyCalc,Range))
 	print("DutyCycle set to %i Percent" %DutyCycle)
@@ -217,23 +218,51 @@ def main(args):
 	wiringpi.pwmWrite(18,DutyCalc) # duty cycle between 0 and 1024. 0 = off, 1024 = fully on
 
 	Volts = 3.3*DutyCalc/Range
-	Sensor = 0.4*DutyCalc/Range
+	Sensor = Vref*DutyCalc/Range
 	print("Pin 18 is set to %g Volts" %Volts)
 	print("Past the Op Amp, sensor voltage calculates to %g Volts" %Sensor)
 
 	raw_input("Press [Enter] to begin test.")
 	# Prep for test
 	begin = int(start*1000)
+	max = int(high*1000)
+	min = int(low*1000)
 	finish = int(end*1000)
-	DutyCalc = (start*Range)/(0.4)# has range of Range
+	
+	DutyCalc = (start*Range)/(Vref)# has range of Range
 	print DutyCalc
 	print "start %0.3f volts" %start
 	# Test
-	for i in range(begin, finish+1):
+	for i in range(begin, max):
 		print "i is %i in loop" %i
 		print "DutyCalc is %i of 1024" %DutyCalc
-		DutyCalc = ((start+(i*0.001))*Range)/(0.4)# has range of Range
-		voltage = DutyCalc*0.4/Range
+		DutyCalc = ((start+(i*0.001))*Range)/(Vref)# has range of Range
+		voltage = DutyCalc*Vref/Range
+		# pass in variable for time delay from GUI
+		time.sleep(0.040)
+		wiringpi.pwmWrite(18,int(DutyCalc))
+		print "supplied voltage is calculated to be %0.3f volts" %voltage
+		# call ADC
+		#time.sleep(0.02)
+
+		raw_value = ad7705.readADResultRaw(CHN_AIN1) 
+		voltage_reading = ad7705.readVoltage(CHN_AIN1,2.5)
+		print "ADC raw %s bits" % raw_value
+		print "ADC voltage %s volts" % voltage_reading
+		# calculate current
+		#import shunt resistor value
+		calc_current = voltage_reading/shunt_resistor
+		print "calculated current is %s Amps" %calc_current
+		print "  "
+		
+		# Save the test results
+		test_csv.write("%d, %0.3f, %0.3f, %0.3f\n" % (i, voltage, voltage_reading, calc_current))
+		
+	for i in range(max, finish-1, -1):
+		print "i is %i in loop" %i
+		print "DutyCalc is %i of 1024" %DutyCalc
+		DutyCalc = ((i*0.001)*Range)/(Vref)# has range of Range
+		voltage = DutyCalc*Vref/Range
 		# pass in variable for time delay from GUI
 		time.sleep(0.040)
 		wiringpi.pwmWrite(18,int(DutyCalc))
