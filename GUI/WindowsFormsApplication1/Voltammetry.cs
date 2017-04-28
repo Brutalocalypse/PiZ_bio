@@ -200,7 +200,7 @@ namespace WindowsFormsApplication1
                     // The name of the   
                     // remote device is "host.contoso.com".  
                     //IPHostEntry ipHostInfo = Dns.Resolve("host.contoso.com");
-                    IPAddress ipAddress = IPAddress.Parse("192.168.137.251");
+                    IPAddress ipAddress = IPAddress.Parse("192.168.137.253");
                     IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
 
                     // Create a TCP/IP socket.  
@@ -216,18 +216,26 @@ namespace WindowsFormsApplication1
 
 
                     //
-                    string[] data = new string[4];
+                    //string[] data = new string[4];
+                    //string specifier = "G";
+                    //data[0] = input0.ToString(specifier);
+                    //data[1] = input1.ToString(specifier);
+                    //data[2] = input2.ToString(specifier);
+                    //data[3] = input3.ToString(specifier);
+                    //string sendOff = $"demo2: {data[0]} {data[1]} {data[2]} {data[3]} \n";
+
+                    string[] data = new string[2];
                     string specifier = "G";
                     data[0] = input0.ToString(specifier);
                     data[1] = input1.ToString(specifier);
-                    data[2] = input2.ToString(specifier);
-                    data[3] = input3.ToString(specifier);
-                    string sendOff = $"demo2: {data[0]} {data[1]} {data[2]} {data[3]} \n";
+                    //data[2] = input2.ToString(specifier);
+                    //data[3] = input3.ToString(specifier);
+                    string sendOff = $"proto: {data[0]} {data[1]} \n";
 
                     Console.WriteLine(data[0]);
                     Console.WriteLine(data[1]);
-                    Console.WriteLine(data[2]);
-                    Console.WriteLine(data[3]);
+                    //Console.WriteLine(data[2]);
+                    //Console.WriteLine(data[3]);
                     Console.WriteLine(sendOff);
 
 

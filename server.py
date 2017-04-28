@@ -38,6 +38,9 @@ def perform_command(command, args):
     elif command == "pwm":
         print "Received 'pwm' command. Starting PWM"
         os.system("sudo python pwm.py %s" % args) 
+    elif command == "proto":
+        print "Received 'proto' command. Starting Prototype"
+        os.system("sudo python proto.py %s" % args) 
     else:
         print "Received unidentified command: '%s'. Terminating" % command
         sys.exit(1)
