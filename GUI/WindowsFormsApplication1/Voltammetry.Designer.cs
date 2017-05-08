@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -182,7 +182,7 @@
             this.HostBox.Name = "HostBox";
             this.HostBox.Size = new System.Drawing.Size(100, 20);
             this.HostBox.TabIndex = 20;
-            this.HostBox.Text = "192.168.137.253";
+            this.HostBox.Text = "192.168.137.73";
             // 
             // label7
             // 
@@ -271,7 +271,7 @@
             this.HighE.Size = new System.Drawing.Size(65, 20);
             this.HighE.TabIndex = 28;
             this.HighE.Value = new decimal(new int[] {
-            10,
+            40,
             0,
             0,
             131072});
@@ -314,17 +314,17 @@
             // 
             // VoltGraph
             // 
-            chartArea5.Name = "ChartArea1";
-            this.VoltGraph.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.VoltGraph.Legends.Add(legend5);
+            chartArea1.Name = "ChartArea1";
+            this.VoltGraph.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.VoltGraph.Legends.Add(legend1);
             this.VoltGraph.Location = new System.Drawing.Point(508, 9);
             this.VoltGraph.Name = "VoltGraph";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.VoltGraph.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.VoltGraph.Series.Add(series1);
             this.VoltGraph.Size = new System.Drawing.Size(452, 300);
             this.VoltGraph.TabIndex = 31;
             this.VoltGraph.Text = "VoltGraph";

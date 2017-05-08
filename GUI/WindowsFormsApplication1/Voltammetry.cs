@@ -75,7 +75,11 @@ namespace WindowsFormsApplication1
             // chart = GetDataTableFromCsv();
             //GetDataTableFromCsv("C:\\Users\\Brutalocalypse\\Desktop\\adc_test_1.csv", true);
 
-            using (var fs = File.OpenRead(@"C:\Users\LethalInjection\Desktop\adc_test_1.csv"))
+            //Desktop
+            using (var fs = File.OpenRead(@"C:\Users\Brutalocalypse\Desktop\adc_test_1.csv"))
+
+            //Laptop
+            //using (var fs = File.OpenRead(@"C:\Users\LethalInjection\Desktop\adc_test_1.csv"))
             using (var reader = new StreamReader(fs))
             {
                 List<string> iter = new List<string>();
@@ -92,7 +96,9 @@ namespace WindowsFormsApplication1
                     voltX.Add(values[2]);
                     ampY.Add(values[3]);
                 }
-                this.VoltGraph.Series["Series1"].Points.DataBindXY(iter,inVolt);
+                // Iteration vs Voltage Input graph
+                //this.VoltGraph.Series["Series1"].Points.DataBindXY(iter,inVolt);
+                this.VoltGraph.Series["Series1"].Points.DataBindXY(inVolt, ampY);
             }
 
 
@@ -200,7 +206,7 @@ namespace WindowsFormsApplication1
                     // The name of the   
                     // remote device is "host.contoso.com".  
                     //IPHostEntry ipHostInfo = Dns.Resolve("host.contoso.com");
-                    IPAddress ipAddress = IPAddress.Parse("192.168.137.253");
+                    IPAddress ipAddress = IPAddress.Parse("192.168.137.73");
                     IPEndPoint remoteEP = new IPEndPoint(ipAddress, port);
 
                     // Create a TCP/IP socket.  
