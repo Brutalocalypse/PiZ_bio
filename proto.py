@@ -47,7 +47,7 @@ def main(args):
 	# Hardware settings/references
 	shunt_resistor = 10 # 10 Ohms
 		# High-Side Current Monitor IC
-	monitor_gain = 500
+	gain = 500
 		# DAC Vref = 2.048v internal
 		# ADC Vref = Vdd = 3.3v
 
@@ -74,12 +74,14 @@ def main(args):
 		# read channel 1 in single ended mode
 		voltage_reading = adcdac.read_adc_voltage(1, 0)
 		#print("%0.3f counts" %i)
-		calc_current = 1000*voltage_reading/shunt_resistor
+		# Vdrop @ shunt = voltage_reading/gain
+		# Current = Vdrop/Rshunt
+		calc_current = (voltage_reading/gain)/shunt_resistor
 		print("%.3f volts driven, %.3f volts seen" %(voltage, voltage_reading))
-		print("Calculated current is %s mA \n" %calc_current)
+		print("Calculated current is %.5f mA \n" %(calc_current*1000))
 		#save test results
 		count = count + 1
-		test_csv.write("%d, %.3f, %.3f, %.3f\n" %(count, voltage, voltage_reading, calc_current))
+		test_csv.write("%d, %.3f, %.3f, %s\n" %(count, voltage, voltage_reading, calc_current))
 		voltage = voltage+0.01
 		time.sleep(0.040)
 	# ramp down
@@ -88,12 +90,12 @@ def main(args):
 		# read channel 1 in single ended mode
 		voltage_reading = adcdac.read_adc_voltage(1, 0)
 		#print("%0.3f counts" %i)
-		calc_current = 1000*voltage_reading/shunt_resistor
+		calc_current = (voltage_reading/gain)/shunt_resistor
 		print("%.3f volts driven, %.3f volts seen" %(voltage, voltage_reading))
-		print("Calculated current is %s mA \n" %calc_current)
+		print("Calculated current is %.5f mA \n" %(calc_current*1000))
 		#save test results
 		count = count + 1
-		test_csv.write("%d, %.3f, %.3f, %.3f\n" %(count, voltage, voltage_reading, calc_current))
+		test_csv.write("%d, %.3f, %.3f, %s\n" %(count, voltage, voltage_reading, calc_current))
 		voltage = voltage-0.01
 		time.sleep(0.040)  
 
