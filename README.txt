@@ -22,6 +22,9 @@ Debugging
   Testing GUI
     # Install Visual Studio
   Code hangs at File Transfer
+    # Ensure Port 22 is Forwarded in Windows Firewall Advanced Settings
+    -- if Port 22 is an Enabled Inbound Rule, proceed to the following steps
+    
     # Found that the authentication can fall and can be solved by running SCP without sshpass -p "password"
     -- SFTP.py -> sshpass -p 'password' scp %s Brutalocalypse@192.168.137.1:Desktop
     -- in terminal, "scp source_filename Remote_Username@ip_address:remote_path/remote_filename"
