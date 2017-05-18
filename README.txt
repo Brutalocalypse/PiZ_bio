@@ -9,7 +9,11 @@ Operation
 
 Notes
   TCP/IP port 50525
-  -- Windows Firewall appears to not require to have this port opened
+    # Windows Firewall appears to not require to have this port opened
+  SSHPASS and SSH Keys
+    # SSH Keys should be used in this implementation. At some point there was a bug with key authentication
+    # that was never resolved as focus had to be diverted towards other elements. The quick-fix was
+    # to use SSHPASS but I recommended against using and storing passwords.
 
 Debugging
   Ping Tests
