@@ -3,7 +3,7 @@
 # For Windows Client Machines
 Operation
 SSH Port Forward for Windows Machines
-	  # Advanced Firewall Settings -> Inbound Rules, port 22
+    # Advanced Firewall Settings -> Inbound Rules, port 22
     -- This is needed to allow the file transfer to occur, more specifically enable a SSH connection
   Visual Studio or the Application_file.exe
 
@@ -31,3 +31,4 @@ Debugging
     # Accept/Yes, then run the suggested command to clear the known_hosts file
     # Now run the command with the sshpass portion
     -- in terminal, "sshpass -p 'password' scp source_filename Remote_Username@ip_address:remote_path/remote_filename"
+  
