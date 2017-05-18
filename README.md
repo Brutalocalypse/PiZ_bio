@@ -2,8 +2,8 @@
 
 # For Windows Client Machines
 Operation
-  SSH Port Forward for Windows Machines
-    # Advanced Firewall Settings -> Inbound Rules, port 22
+SSH Port Forward for Windows Machines
+	  # Advanced Firewall Settings -> Inbound Rules, port 22
     -- This is needed to allow the file transfer to occur, more specifically enable a SSH connection
   Visual Studio or the Application_file.exe
 
