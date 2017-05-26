@@ -1,11 +1,53 @@
 # PiZ_bio
+# For Raspberry Pi
+RPi SSH Setup (need to setup SFTP on Pi in order to push file from Pi to Windows PC)
+  in terminal: ssh-keygen.exe (generate a public ssh key)
+    in .ssh directory - ~/.ssh
+    pass this key onto Windows in the Authorized Key file under "ssh" under Username
+  Make a ssh config for better use
+    sudo nano config (information for connecting)
+      in .ssh directory (~/.ssh)
+      
+      Host Name
+        Hostname ipAddress
+        User Username
+        
+   Test via command line on Pi
+    scp present_directory/filename name(from ssh.config):remote_path/filename
+    
+Connecting to new remote client PC
+  will have to erase cache each time even though fingerprint key has been input!!!!
+  ssh-keygen -f "/home/pi/.ssh/known_hosts" -R 192.168.137.1
 
 # For Windows Client Machines
+Windows SSH Setup
+  Download the latest OpenSSH for Windows binaries (package OpenSSH-Win32.zip)
+  Extract the package to C:\Program Files\OpenSSH
+  As the Administrator, install SSHD and ssh-agent services: 
+  powershell.exe -ExecutionPolicy Bypass -File install-sshd.ps1
+  As the Administrator, generate server keys by running the following commands from the C:\Program Files\OpenSSH: 
+  .\ssh-keygen.exe -A
+  Open a port for the SSH server in Windows Firewall:
+  Either run the following PowerShell command (Windows 8 and 2012 or newer only), as the Administrator: 
+  New-NetFirewallRule -Protocol TCP -LocalPort 22 -Direction Inbound -Action Allow -DisplayName SSH
+  or go to Control Panel > System and Security > Windows Firewall > Advanced Settings > Inbound Rules and add a new rule for port 22.
+  To allow a public key authentication, as an Administrator, from C:\Program Files\OpenSSH, run: 
+  powershell.exe -ExecutionPolicy Bypass -File install-sshlsa.ps1 
+  and restart the machine
+  Start the service and/or configure automatic start:
+  Go to Control Panel > System and Security > Administrative Tools and open Services. Locate SSHD service.
+  If you want the server to start automatically when your machine is started: Go to Action > Properties. In the Properties dialog, change Startup type to Automatic and confirm.
+  Start the SSHD service by clicking the Start the service.
+
+  for further instructions
+  https://winscp.net/eng/docs/guide_windows_openssh_server#installing_sftp_ssh_server
+
 Operation
   SSH Port Forward for Windows Machines
     # Advanced Firewall Settings -> Inbound Rules, port 22
     -- This is needed to allow the file transfer to occur, more specifically enable a SSH connection
-  Visual Studio or the Application_file.exe
+  GUI Application
+    # Visual Studio or the Application_file.exe
 
 Notes
   TCP/IP port 50525
@@ -18,7 +60,7 @@ Notes
 Debugging
   Ping Tests
     # For Windows Machines, must enable Inbound Rules "File and Printer Sharing (Echo Request - ICMPv4-In)"
-    # in Advanced Firewall Settings (Public, maybe Private and Domain)
+    # in Advanced Firewall Settings (Private and Domain, shouldn't need Public)
   Running Python Scripts
     # Install Python 2.7
     # Add Python 2.7 to Environment Variables PATH
